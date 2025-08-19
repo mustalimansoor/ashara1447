@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zohra | Zeenat, Modesty, and Taqwa — A Thematic Journey</title>
+  <meta name="description" content="An interactive, visual exploration of Zohra (Venus), zeenat, modesty, taqwa, and ta‘at, with exemplars from Maulatona Fatema AS and Amirul Mumineen Ali AS." />
+  <style>
+    :root{
+      --bg:#0a0a10;
+      --card:#12121c;
+      --ink:#EAEAF7;
+      --muted:#B6B6CE;
+      --accent:#FEBF3B;   /* gold (sun) */
+      --rose:#E3688E;     /* Venus rose */
+      --emerald:#46C298;  /* garden/taqwa */
+      --violet:#7B6FF2;   /* serenity */
+      --shadow: 0 8px 28px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink); background: radial-gradient(1200px 600px at 75% -10%, #1a1428 0%, #0d0c16 40%, var(--bg) 70%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900"><defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0%" stop-color="%230c0c14" stop-opacity=".6"/><stop offset="100%" stop-color="%230c0c14" stop-opacity="0"/></radialGradient></defs><rect width="100%" height="100%" fill="%230a0a10"/><g fill="%23ffffff" fill-opacity=".07"><circle r="1" cx="50" cy="60"/><circle r="1" cx="320" cy="140"/><circle r="1" cx="860" cy="90"/><circle r="1" cx="1180" cy="300"/><circle r="1" cx="220" cy="420"/><circle r="1" cx="640" cy="500"/><circle r="1" cx="1040" cy="620"/></g><rect width="100%" height="100%" fill="url(%23g)"/></svg>') no-repeat center/cover fixed;
+    }
+
+    /* Layout */
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter: blur(10px);
+      background:rgba(10,10,16,.55); border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:14px 20px; max-width:1100px; margin:0 auto;
+    }
+    .brand{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.3px}
+    .brand .sun{width:14px; height:14px; background:var(--accent); border-radius:50%; box-shadow:0 0 16px var(--accent)}
+    .brand .venus{width:10px; height:10px; background:var(--rose); border-radius:50%; box-shadow:0 0 10px var(--rose)}
+    nav a{color:var(--muted); text-decoration:none; margin:0 10px; font-weight:600}
+    nav a:hover{color:var(--ink)}
+    .togglebar{display:flex; gap:10px; align-items:center}
+    .chip{
+      border:1px solid rgba(255,255,255,.12); padding:6px 10px; border-radius:999px; color:var(--muted); cursor:pointer; background:transparent; font-weight:600
+    }
+    .chip.active{color:#0a0a10; background:var(--ink)}
+    .hero{
+      max-width:1100px; margin:30px auto; padding:24px;
+      display:grid; grid-template-columns:1.2fr .8fr; gap:26px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .hero .left{padding:28px}
+    .eyebrow{color:var(--rose); font-weight:800; letter-spacing:.12em; text-transform:uppercase; font-size:12px}
+    h1{margin:.4em 0 .2em; font-size:40px; line-height:1.1}
+    .lead{color:var(--muted); font-size:18px; line-height:1.6}
+    .badges{margin-top:14px; display:flex; flex-wrap:wrap; gap:8px}
+    .badge{padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px; border:1px solid rgba(255,255,255,.12)}
+    .badge.sun{border-color:rgba(254,191,59,.35); color:var(--accent)}
+    .badge.venus{border-color:rgba(227,104,142,.35); color:var(--rose)}
+    .badge.garden{border-color:rgba(70,194,152,.35); color:var(--emerald)}
+
+    /* Orbit visual */
+    .orbit{
+      position:relative; height:320px; padding:20px; display:flex; align-items:center; justify-content:center
+    }
+    .sunCore{width:110px; height:110px; background:radial-gradient(circle at 30% 30%, #fff7c0, #ffcf66, #f5a623); border-radius:50%; box-shadow:0 0 40px 12px rgba(254,191,59,.45)}
+    .orbitRing{position:absolute; width:260px; height:260px; border:1px dashed rgba(255,255,255,.15); border-radius:50%}
+    .planet{
+      position:absolute; width:22px; height:22px; background:radial-gradient(circle at 30% 30%, #ffd1df, #e3688e); border-radius:50%;
+      box-shadow:0 0 14px rgba(227,104,142,.6);
+      animation: revolve 14s linear infinite;
+      transform-origin: -80px -80px;
+    }
+    @keyframes revolve{
+      from{ transform: rotate(0deg) translateX(130px) rotate(0deg) }
+      to  { transform: rotate(360deg) translateX(130px) rotate(-360deg)}
+    }
+
+    /* Sections */
+    section{max-width:1100px; margin:30px auto; padding:0 24px}
+    section h2{
+      font-size:28px; margin:24px 0 10px; padding-bottom:6px;
+      border-bottom:1px solid rgba(255,255,255,.08)
+    }
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+    .pane{padding:20px}
+    .subtitle{color:var(--muted); margin-top:-6px}
+    .callout{
+      border-left:5px solid var(--emerald); padding:14px 16px; background:rgba(70,194,152,.08);
+      border-radius:10px
+    }
+    .callout.rose{border-left-color:var(--rose); background:rgba(227,104,142,.08)}
+    .callout.sun{border-left-color:var(--accent); background:rgba(254,191,59,.08)}
+    .quote{
+      border:1px solid rgba(255,255,255,.12); padding:16px; border-radius:12px; background:rgba(255,255,255,.03); font-style:italic
+    }
+    .tag{display:inline-block; font-size:12px; color:var(--muted); margin-top:6px}
+    .mini{font-size:13px; color:var(--muted)}
+    .pill{display:inline-block; padding:4px 8px; border:1px solid rgba(255,255,255,.15); border-radius:999px; font-size:12px; color:var(--muted)}
+
+    /* Accordions */
+    details{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.09); border-radius:12px; padding:14px 16px
+    }
+    summary{cursor:pointer; font-weight:700}
+    details > div{padding-top:8px; color:var(--muted); line-height:1.7}
+    details + details{margin-top:10px}
+
+    /* Lang blocks */
+    .lang{display:none}
+    .lang.show{display:block}
+    .rtl{direction:rtl; text-align:right; font-family: "Noto Naskh Arabic", "Amiri", "Scheherazade New", serif}
+    .chip.langbtn{border-color:rgba(227,104,142,.35); color:var(--rose)}
+    .chip.langbtn.active{background:var(--rose); color:white}
+
+    /* Footer */
+    footer{max-width:1100px; margin:50px auto; padding:24px; color:var(--muted); text-align:center}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .orbit{height:260px}
+      .orbitRing{width:220px;height:220px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <span class="sun"></span><span class="venus"></span>
+        <span>Zohra • Zeenat • Taqwa</span>
+      </div>
+      <nav>
+        <a href="#zohra">Zohra</a>
+        <a href="#zeenat">Zeenat & Modesty</a>
+        <a href="#taat">Taqwa & Ta‘at</a>
+        <a href="#exemplars">Exemplars</a>
+        <a href="#family">Family & Parenting</a>
+      </nav>
+      <div class="togglebar">
+        <button class="chip langbtn active" data-lang="en">EN</button>
+        <button class="chip langbtn" data-lang="ar">AR</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="left card">
+      <div class="eyebrow">al-Muʿizziyyah al-Qahira • Beauty and Might</div>
+      <h1>Zohra (Venus): Beauty as a path to truth</h1>
+      <p class="lead">
+        In demonstrating Islam’s might, the Fatimi Imams AS tended equally to its beauty. Zohra (Venus), the “sun’s bride,” symbolizes refinement and adornment guided by modesty and taqwa.
+      </p>
+      <div class="badges">
+        <span class="badge sun">Sun’s bride</span>
+        <span class="badge venus">Sa‘d-e-asghar</span>
+        <span class="badge garden">Gardens of Cairo</span>
+      </div>
+    </div>
+    <div class="card orbit" aria-hidden="true" title="Visual cue: Venus revolving around the Sun">
+      <div class="sunCore"></div>
+      <div class="orbitRing"></div>
+      <div class="planet"></div>
+    </div>
+  </div>
+
+  <!-- ZOHRA -->
+  <section id="zohra">
+    <h2>Zohra and the aesthetics of faith</h2>
+    <p class="subtitle">
+      Beauty elevates; it never distracts from obedience. The Fatimi vision marries grandeur with grace.
+    </p>
+    <div class="grid">
+      <div class="pane card">
+        <div class="callout sun">
+          <strong>Concept:</strong> Zohra is associated with earthly good fortune (sa‘d-e-asghar) and is called the “sun’s bride,” mirroring Maulana Ali AS as the spiritual sun and Maulatona Fatema AS as his beloved.
+        </div>
+        <div style="height:10px"></div>
+        <div class="quote">
+          “Among the signs of Allah’s ihsaan is that beauty points you back to the Beautiful.”
+        </div>
+        <div class="tag">Theme • Aesthetics that serve submission</div>
+      </div>
+      <div class="pane card">
+        <div class="callout">
+          <strong>Visual cue:</strong> Gold accents evoke the sun; rose tones evoke Zohra. Garden greens hint at the Fatimi cultivation of lush spaces in al-Qahira.
+        </div>
+        <ul class="mini">
+          <li><span class="pill">Gold = Nur</span> <span class="pill">Rose = Zeenat</span> <span class="pill">Green = Taqwa</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- AR notes from PDF -->
+    <div class="lang ar rtl">
+      <div class="card pane">
+        <div class="callout rose">
+          <strong>زُهْرَة:</strong> عُرْس الشمس. تأثيرها يُزَيِّن الأرض كالبساتين ويُرشد الزينة إلى الحياء والطاعة.
+        </div>
+        <div class="mini">زُهْرَة − Venus • عرس الشمس • زمين سرسبز مثل باغيچه</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZEENAT & MODESTY -->
+  <section id="zeenat">
+    <h2>Zeenat and modesty</h2>
+    <div class="grid">
+      <div class="pane card">
+        <div class="callout">
+          <strong>Ayat:</strong> “Adorn yourselves at every masjid.” Zeenat here is dignified covering of one’s ‘awrat during namaz—beauty inseparable from decorum.
+        </div>
+        <div style="height:10px"></div>
+        <div class="quote rtl">
+          خُذُوا زِينَتَكُمْ عِندَ كُلِّ مَسْجِدٍ
+        </div>
+        <div class="tag">Qur’an • Zeenat ≠ ostentation</div>
+      </div>
+      <div class="pane card">
+        <div class="callout rose">
+          <strong>Wisdom:</strong> “Whoever is clothed in the garment of modesty, people will not see his faults.” True adornment is conduct, not cosmetics.
+        </div>
+        <p class="mini">Appearance should reflect the inner state; modest dress with immodest speech is a contradiction.</p>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:16px">
+      <div class="pane card">
+        <div class="callout sun">
+          <strong>Balance:</strong> Modesty is not silence when truth calls. Maulatona Fatema AS veiled her sanctity yet spoke publicly to establish Maulana Ali’s AS right.
+        </div>
+      </div>
+      <div class="pane card">
+        <div class="callout">
+          <strong>Grief as obedience:</strong> Weeping for Imam Husain AS is a faridat; modesty does not bar the voice from haqq in matam and lament.
+        </div>
+      </div>
+    </div>
+
+    <div class="lang ar rtl">
+      <div class="pane card">
+        <div class="quote">
+          من كساه الحياء ثوبه لم ير الناس عيبه
+        </div>
+        <div class="mini">زينة حقيقية: خشوع وطاعة، لا رياء.</div>
+      </div>
+      <div class="pane card">
+        <div class="callout">
+          <strong>توجيه:</strong> لحاظ في معنى—واجب عمل ما شرم راك؛ نوح وعويل سي شرمائي نهين.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAQWA & TA'AT -->
+  <section id="taat">
+    <h2>Taqwa and the ease of ta‘at</h2>
+    <div class="grid">
+      <div class="pane card">
+        <div class="callout">
+          <strong>Core:</strong> Taqwa is aligning deeds with Allah and His Awliya. “No obedience to the created in disobedience to the Creator”.
+        </div>
+        <p class="mini">Within marriage, roles and duties exist, but Allah’s command has precedence. Authority entails fulfilling one’s own duties first.</p>
+      </div>
+      <div class="pane card">
+        <div class="callout">
+          <strong>Etymology:</strong> Ta‘at’s root sense includes simplicity and ease: fluent tongue, goals yielding with grace—relationships should mirror this ease, understanding, and love.
+        </div>
+        <div class="tag">Language • Effortlessness as virtue</div>
+      </div>
+    </div>
+
+    <div class="lang ar rtl">
+      <div class="pane card">
+        <div class="callout">
+          <strong>ولباس التقوى ذلك خير:</strong> هر حال ما خدا ان خدا نا ولي في خوشي اختيار كرت.
+        </div>
+      </div>
+      <div class="pane card">
+        <div class="callout">
+          <strong>طاعة:</strong> سهلائي سي عمل كرو—پريشاني بغير.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXEMPLARS & STORIES -->
+  <section id="exemplars">
+    <h2>Exemplars of love and truth</h2>
+    <p class="subtitle">Stories that turn doctrine into living light.</p>
+
+    <div class="grid">
+      <div class="pane card">
+        <details open>
+          <summary>Pomegranate and providence</summary>
+          <div>
+            When Maulatona Fatema AS craved a pomegranate, Maulana Ali AS borrowed a dirham to purchase one, but finding a needy man, he gave it away for Allah’s sake. Fatema AS was healed of her craving, and a tray of nine pomegranates arrived via Salman al-Farsi RA—with the tenth revealed to complete the tenfold reward of a good deed.
+          </div>
+        </details>
+
+        <details>
+          <summary>“Your presence suffices me”</summary>
+          <div>
+            Rasul Allah SAW consoled Fatema AS by praising Ali AS. She hurried to share it, and he replied: “By Allah’s grace, your presence suffices me above it all”—mutual honor as the summit of conjugal love.
+          </div>
+        </details>
+      </div>
+
+      <div class="pane card">
+        <details open>
+          <summary>Veil and voice</summary>
+          <div>
+            Fatema AS requested concealment of her blessed body after wafaat—ultimate modesty—yet when haqq demanded, she addressed the majlis veiled, with an oration historians deem unparalleled.
+          </div>
+        </details>
+
+        <details>
+          <summary>“Rayhana, not qahramana”</summary>
+          <div>
+            “إن المرأة ريحانة وليست بقهرمانة” — Woman is a fragrant blossom, not a burdened drudge. True zeal guards dignity and assigns roles with mercy, not domination. From al-Kirmani RA’s perspective: men are naaqis compared to women’s capacity to bear and birth a child.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="lang ar rtl">
+      <div class="pane card">
+        <div class="callout rose">
+          <strong>زِينَة ني حقيقي معنى:</strong> اتنو خشوع كر طاعة سي هناوي—مشكل اوے تو طاعة نرم وكے طاعة كرى تو عزة ان كرامة زيادة نهائي.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAMILY & PARENTING -->
+  <section id="family">
+    <h2>Family, friendship, and user‑friendly mercy</h2>
+    <div class="grid">
+      <div class="pane card">
+        <div class="callout">
+          <strong>Children:</strong> Treat them like friends—what thrives is what’s user‑friendly. Let your parenting be approachable and loving, like good design.
+        </div>
+        <div class="mini">Approachability fosters trust; trust sustains guidance.</div>
+      </div>
+      <div class="pane card">
+        <div class="callout">
+          <strong>Roles and rights:</strong> Duties exist within marriage, but none override Allah’s command. Authority requires humility and accountability first.
+        </div>
+        <div class="mini">Ta‘at blossoms where mercy and ease prevail.</div>
+      </div>
+    </div>
+
+    <div class="lang ar rtl">
+      <div class="pane card">
+        <div class="callout">
+          <strong>دوست جيم رث:</strong> فرزند وساعة سهلائي كرب—بوجم كم كرى.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDITS -->
+  <section>
+    <div class="card pane">
+      <div class="callout">
+        <strong>At a glance:</strong> Zohra frames beauty; zeenat refines modesty; taqwa aligns action; ta‘at makes obedience graceful. Fatemi exemplars turn principles into living practice.
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Designed as a learning aid with visual cues and bilingual notes. Switch EN/AR to reveal original quotations.</div>
+  </footer>
+
+  <script>
+    // Language toggle (EN default visible, AR hidden)
+    const btns = document.querySelectorAll('.langbtn');
+    function setLang(code){
+      btns.forEach(b => b.classList.toggle('active', b.dataset.lang===code));
+      document.querySelectorAll('.lang').forEach(el => {
+        if(el.classList.contains(code)) el.classList.add('show'); else el.classList.remove('show');
+      });
+    }
+    btns.forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+    setLang('en');
+  </script>
+</body>
+</html>
